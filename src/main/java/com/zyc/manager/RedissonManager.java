@@ -4,18 +4,16 @@ import com.zyc.entity.User;
 import com.zyc.redisson.anno.RedissonLock;
 import com.zyc.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 @Component
 @Slf4j
 public class RedissonManager {
 
-    private final UserService userService;
-
-    public RedissonManager(UserService userService) {
-        this.userService = userService;
-    }
+    @Resource
+    private UserService userService;
 
     @RedissonLock(lockName = "lockWithExpireTime", expireTime = 20L)
     public void insertWithExpireTime(User user) {

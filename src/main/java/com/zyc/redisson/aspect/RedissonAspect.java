@@ -8,11 +8,11 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,14 +21,11 @@ import java.util.Optional;
 @Component
 public class RedissonAspect {
 
-    private final RedissonLockTemplate redissonLockTemplate;
+    @Resource
+    private RedissonLockTemplate redissonLockTemplate;
 
     @Value("${spring.redis.prefix:match:}")
     private String prefix;
-
-    public RedissonAspect(RedissonLockTemplate redissonLockTemplate) {
-        this.redissonLockTemplate = redissonLockTemplate;
-    }
 
     private String formatKey(String key) {
         return Optional.ofNullable(prefix).orElse("") + key;

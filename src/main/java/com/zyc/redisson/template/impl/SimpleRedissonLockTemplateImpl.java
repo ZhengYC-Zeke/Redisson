@@ -8,17 +8,15 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
 public class SimpleRedissonLockTemplateImpl implements RedissonLockTemplate {
 
-    private final RedissonClient redissonClient;
-
-    public SimpleRedissonLockTemplateImpl(RedissonClient redissonClient) {
-        this.redissonClient = redissonClient;
-    }
+    @Resource
+    private RedissonClient redissonClient;
 
     @Override
     public <T> T lock(RedissonLockCallBack<T> callBack, long expireTime, TimeUnit timeUnit, boolean noLockException, String exceptionMessage) {

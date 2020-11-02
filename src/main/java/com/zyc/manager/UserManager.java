@@ -5,26 +5,23 @@ import com.zyc.service.UserService;
 import org.redisson.api.RLock;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 @Component
 public class UserManager {
 
-    private final UserService userService;
+    @Resource
+    private UserService userService;
 
-    private final RedissonClient redissonClient;
+    @Resource
+    private RedissonClient redissonClient;
 
     private static final String KEY = "Redis:Test";
 
     private static final String LOCK = "Redis:Lock";
-
-    public UserManager(RedissonClient redissonClient, UserService userService) {
-        this.redissonClient = redissonClient;
-        this.userService = userService;
-    }
 
     private void put(User user) {
         RMap<Object, Object> map = redissonClient.getMap(KEY);

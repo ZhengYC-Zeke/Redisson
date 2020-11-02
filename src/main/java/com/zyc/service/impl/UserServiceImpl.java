@@ -3,17 +3,15 @@ package com.zyc.service.impl;
 import com.zyc.dao.UserMapper;
 import com.zyc.entity.User;
 import com.zyc.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserMapper userMapper;
-
-    public UserServiceImpl(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
+    @Resource
+    private UserMapper userMapper;
 
     @Override
     public User selectById(Integer userId) {

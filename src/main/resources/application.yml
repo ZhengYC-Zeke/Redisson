@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: redisson
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 19971029
+    url: jdbc:mysql://www.zekez.xyz:3306/redisson?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    port: 7000
+    host: www.zekez.xyz
+    database: 6
+logging:
+  level:
+    com.zyc.mapper: debug
+
